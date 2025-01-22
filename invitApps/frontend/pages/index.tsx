@@ -5,6 +5,7 @@ const Home = () => {
     name: '',
     email: '',
     event: '',
+    ticket_id: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +16,7 @@ const Home = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Envoyer les données au backend pour générer le billet d'invitation
-    const response = await fetch('/api/invitation', {
+    const response = await fetch('/generate-ticket', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,6 +61,15 @@ const Home = () => {
           name="event"
           placeholder="Événement"
           value={formData.event}
+          onChange={handleChange}
+          className="mb-2 p-2 border border-gray-300 rounded"
+          required
+        />
+        <input
+          type="text"
+          name="ticket_id"
+          placeholder="ID du billet"
+          value={formData.ticket_id}
           onChange={handleChange}
           className="mb-2 p-2 border border-gray-300 rounded"
           required
