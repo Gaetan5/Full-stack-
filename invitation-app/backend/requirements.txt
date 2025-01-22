@@ -1,0 +1,5 @@
+Flask==2.0.3
+Flask-Cors==3.0.10
+qrcode==7.3
+Pillow==8.4.0
+pyjwt==2.1.0
