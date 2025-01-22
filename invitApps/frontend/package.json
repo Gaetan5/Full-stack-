@@ -16,6 +16,6 @@
   "devDependencies": {
     "typescript": "latest",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/node": "latest"
   }
 }
