@@ -15,7 +15,6 @@ const Home = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Envoyer les données au backend pour générer le billet d'invitation
     const response = await fetch('/generate-ticket', {
       method: 'POST',
       headers: {
@@ -26,55 +25,73 @@ const Home = () => {
 
     if (response.ok) {
       const data = await response.json();
-      // Gérer la réponse, par exemple, afficher le QR code ou le lien vers le billet
       console.log(data);
     } else {
-      // Gérer les erreurs
       console.error('Erreur lors de la soumission du formulaire');
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Créer une invitation</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-sm">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nom"
-          value={formData.name}
-          onChange={handleChange}
-          className="mb-2 p-2 border border-gray-300 rounded"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="mb-2 p-2 border border-gray-300 rounded"
-          required
-        />
-        <input
-          type="text"
-          name="event"
-          placeholder="Événement"
-          value={formData.event}
-          onChange={handleChange}
-          className="mb-2 p-2 border border-gray-300 rounded"
-          required
-        />
-        <input
-          type="text"
-          name="ticket_id"
-          placeholder="ID du billet"
-          value={formData.ticket_id}
-          onChange={handleChange}
-          className="mb-2 p-2 border border-gray-300 rounded"
-          required
-        />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h1 className="text-4xl font-bold mb-8">Créer une invitation</h1>
+      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            Nom
+          </label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Nom"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="event">
+            Événement
+          </label>
+          <input
+            type="text"
+            name="event"
+            placeholder="Événement"
+            value={formData.event}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="ticket_id">
+            ID du billet
+          </label>
+          <input
+            type="text"
+            name="ticket_id"
+            placeholder="ID du billet"
+            value={formData.ticket_id}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700">
           Générer l'invitation
         </button>
       </form>

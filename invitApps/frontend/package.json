@@ -3,19 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd ../backend && FLASK_APP=app.py flask run",
+    "dev:frontend": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "tailwindcss": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
-    "@types/node": "latest"
+    "concurrently": "^7.0.0"
   }
 }
