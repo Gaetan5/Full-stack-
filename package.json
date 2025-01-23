@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "A full stack project",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
+ "scripts": {
+  "start": "concurrently \"cd backend && flask run --host=0.0.0.0\" \"cd frontend && npm run dev\""
+},
   "author": "",
   "license": "ISC",
   "dependencies": {

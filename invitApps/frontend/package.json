@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd ../backend && FLASK_APP=app.py flask run",
-    "dev:frontend": "next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },

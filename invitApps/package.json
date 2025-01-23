@@ -7,12 +7,9 @@
     "dev:backend": "cd backend && FLASK_APP=app.py flask run",
     "dev:frontend": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "concurrently \"cd backend && flask run --host=0.0.0.0\" \"cd frontend && npm run dev\""
   },
   "dependencies": {
-    "next": "^15.1.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "ansi-regex": "^5.0.1",
     "ansi-styles": "^4.3.0",
     "chalk": "^4.1.2",
@@ -26,6 +23,9 @@
     "has-flag": "^4.0.0",
     "is-fullwidth-code-point": "^3.0.0",
     "lodash": "^4.17.21",
+    "next": "^15.1.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rxjs": "^7.8.1",
     "shell-quote": "^1.8.2",
     "string-width": "^4.2.3",
@@ -36,12 +36,15 @@
     "wrap-ansi": "^7.0.0",
     "y18n": "^5.0.8",
     "yargs": "^17.7.2",
-    "yargs-parser": "^21.1.1"
+    "yargs-parser": "^21.1.1",
+    "concurrently": "^7.0.0"
   },
   "devDependencies": {
+    "@types/node": "22.10.8",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "typescript": "5.7.3"
   },
   "author": "",
   "license": "ISC",
