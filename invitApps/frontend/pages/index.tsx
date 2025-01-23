@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Composant principal de la page d'accueil
 const Home = () => {
@@ -13,6 +13,9 @@ const Home = () => {
   // État pour stocker l'URL du ticket généré
   const [ticketUrl, setTicketUrl] = useState<string | null>(null);
 
+  // État pour stocker la liste des tickets
+  const [tickets, setTickets] = useState<any[]>([]);
+
   // Gestionnaire de changement pour les champs du formulaire
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,6 +25,7 @@ const Home = () => {
   // Gestionnaire de soumission du formulaire
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log('Form data:', formData); // Log des données du formulaire
     try {
       // Envoi des données du formulaire au serveur backend
       const response = await fetch('http://localhost:5000/generate-ticket', {
@@ -39,11 +43,31 @@ const Home = () => {
 
       // Récupération de l'URL du ticket généré
       const result = await response.json();
+      console.log('Server response:', result); // Log de la réponse du serveur
       setTicketUrl(result.qr_code);
+
+      // Mettre à jour la liste des tickets
+      fetchTickets();
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
+  // Fonction pour récupérer la liste des tickets
+  const fetchTickets = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/get-tickets');
+      const data = await response.json();
+      setTickets(data);
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    }
+  };
+
+  // Utiliser useEffect pour récupérer les tickets au chargement de la page
+  useEffect(() => {
+    fetchTickets();
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -124,6 +148,19 @@ const Home = () => {
           <div className="w-full h-64 bg-gray-200 rounded flex items-center justify-center">
             <span className="text-gray-500">Event Image Placeholder</span>
           </div>
+        </div>
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">List of Tickets</h2>
+          <ul className="space-y-2">
+            {tickets.map((ticket, index) => (
+              <li key={index} className="bg-white p-4 rounded shadow">
+                <p><strong>Name:</strong> {ticket.name}</p>
+                <p><strong>Email:</strong> {ticket.email}</p>
+                <p><strong>Event:</strong> {ticket.event}</p>
+                <p><strong>Ticket ID:</strong> {ticket.ticket_id}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

@@ -6,6 +6,9 @@ import io
 app = Flask(__name__)
 CORS(app)
 
+# Stockage des données en mémoire (pour simplifier)
+data_store = []
+
 @app.route('/generate-invitation', methods=['POST'])
 def generate_invitation():
     data = request.json
@@ -55,8 +58,15 @@ def generate_ticket():
     img.save(buffer, 'PNG')
     buffer.seek(0)
 
+    # Stocker les données dans le data_store
+    data_store.append(data)
+
     # Retourner le QR code en tant que fichier téléchargeable
     return send_file(buffer, mimetype='image/png', as_attachment=True, download_name=f"{guest_name}_ticket.png")
+
+@app.route('/get-tickets', methods=['GET'])
+def get_tickets():
+    return jsonify(data_store)
 
 if __name__ == '__main__':
     app.run(debug=True)
