@@ -13,6 +13,7 @@ def generate_invitation():
     email = data.get('email')
     event = data.get('event')
 
+    # Vérification des champs requis
     if not all([name, email, event]):
         return jsonify({"error": "Missing required fields"}), 400
 
@@ -38,6 +39,7 @@ def generate_ticket():
     event = data.get('event')
     ticket_id = data.get('ticket_id')
 
+    # Vérification des champs requis
     if not all([guest_name, event, ticket_id]):
         return jsonify({"error": "Missing required fields"}), 400
 
@@ -53,6 +55,7 @@ def generate_ticket():
     img.save(buffer, 'PNG')
     buffer.seek(0)
 
+    # Retourner le QR code en tant que fichier téléchargeable
     return send_file(buffer, mimetype='image/png', as_attachment=True, download_name=f"{guest_name}_ticket.png")
 
 if __name__ == '__main__':
