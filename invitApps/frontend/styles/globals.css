@@ -6,6 +6,13 @@ html, body {
   color: #374151;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: normal;
@@ -21,21 +28,55 @@ a:hover {
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.title {
+  text-align: center;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .button {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 0.375rem;
-  background-color: #3b82f6;
-  color: white;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .button:hover {
-  background-color: #2563eb;
+  background-color: #0056b3;
+}
+
+.ticket {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.ticket img {
+  margin-top: 10px;
 }

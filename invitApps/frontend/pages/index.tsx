@@ -9,44 +9,40 @@ const Home = () => {
   });
   const [ticketUrl, setTicketUrl] = useState<string | null>(null);
 
-  // Gestion des changements dans les champs du formulaire
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Gestion de la soumission du formulaire
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch('/generate-ticket', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      setTicketUrl(url);
-    } else {
-      console.error('Erreur lors de la soumission du formulaire');
+    try {
+      const response = await fetch('http://localhost:5000/generate-ticket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      setTicketUrl(result.qr_code);
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-8">Créer une invitation</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Welcome to the Invitation App</h1>
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-            Nom
+            Name
           </label>
           <input
             type="text"
             name="name"
-            placeholder="Nom"
+            placeholder="Name"
             value={formData.name}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
@@ -69,12 +65,12 @@ const Home = () => {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="event">
-            Événement
+            Event
           </label>
           <input
             type="text"
             name="event"
-            placeholder="Événement"
+            placeholder="Event"
             value={formData.event}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
