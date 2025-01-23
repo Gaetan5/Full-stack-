@@ -1,5 +1,3 @@
-# README.md pour le backend
-
 # Projet d'Application d'Invitation Électronique
 
 Ce projet est une application qui génère des billets d'invitation électroniques avec des QR codes pour l'authentification. Le backend est construit avec Flask et gère les requêtes pour créer et stocker les billets d'invitation.

@@ -7,6 +7,7 @@ const Home = () => {
     event: '',
     ticket_id: '',
   });
+  const [ticketUrl, setTicketUrl] = useState<string | null>(null);
 
   // Gestion des changements dans les champs du formulaire
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +27,9 @@ const Home = () => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      console.log(data);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      setTicketUrl(url);
     } else {
       console.error('Erreur lors de la soumission du formulaire');
     }
@@ -97,6 +99,15 @@ const Home = () => {
           Générer l'invitation
         </button>
       </form>
+      {ticketUrl && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Votre billet avec QR code</h2>
+          <img src={ticketUrl} alt="QR Code Ticket" className="w-64 h-64" />
+          <a href={ticketUrl} download="ticket.png" className="block mt-4 text-blue-500 underline">
+            Télécharger le billet
+          </a>
+        </div>
+      )}
     </div>
   );
 };

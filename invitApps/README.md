@@ -1,5 +1,3 @@
-# README.md
-
 # Invitation App
 
 Ce projet est une application web permettant de générer des billets d'invitation électroniques avec QR codes pour l'authentification. Il est composé d'un backend en Flask et d'un frontend en Next.js.
